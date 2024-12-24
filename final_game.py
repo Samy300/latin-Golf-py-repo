@@ -23,29 +23,6 @@ screen_width, screen_height = 1345, 760
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Mafia's Golf")
 
-#Load and scale the img
-'''title_game = pygame.transform.scale(pygame.image.load("Final proyect v.S/Images/title_game.png"), (760, 400))
-background_image = pygame.transform.scale(pygame.image.load("Final proyect v.S/Images/background_potencial.png"), (1345, 760))
-play_button_image = pygame.transform.scale(pygame.image.load("Final proyect v.S/Images/boton_play.png").convert_alpha(), (190, 70))
-levels_button_image = pygame.transform.scale(pygame.image.load("Final proyect v.S/Images/botones_levels_credits.png").convert_alpha(), (285, 135))
-credits_button_image = pygame.transform.scale(pygame.image.load("Final proyect v.S/Images/botones_levels_credits.png").convert_alpha(), (300, 135))
-logo_image = pygame.transform.scale(pygame.image.load("Final proyect v.S/Images/latin_mafia_logo.png").convert_alpha(), (3000, 900))
-credits_card = pygame.transform.scale(pygame.image.load("Images/credits_card2.png").convert_alpha(), (1250, 750))
-arrow_image_up = pygame.transform.scale(pygame.image.load("/Images/flecha_verde.png").convert_alpha(),  (100, 110))
-arrow_image_down = pygame.transform.rotate(arrow_image_up, (180))
-arrow_image_left = pygame.transform.rotate(arrow_image_up, (90))
-arrow_image_right = pygame.transform.rotate(arrow_image_up, (270))
-arrow_border_image_up = pygame.transform.scale(pygame.image.load("/Images/flecha_contorno.png").convert_alpha(),  (100, 110))
-arrow_border_image_down = pygame.transform.rotate(arrow_border_image_up, (180))
-arrow_border_image_left = pygame.transform.rotate(arrow_border_image_up, (90))
-arrow_border_image_right = pygame.transform.rotate(arrow_border_image_up, (270))
-level_display_image = pygame.transform.scale(pygame.image.load("/Images/carta_niveles.png"), (1100, 660))
-level_previews = {
-    1: pygame.transform.scale(pygame.image.load("/Images/level1_preview_image.png"), (755, 815)),
-    2: pygame.transform.scale(pygame.image.load("/Images/level2_preview_image.png"), (755, 815)),
-    3: pygame.transform.scale(pygame.image.load("/Images/level3_preview_image.png"), (755, 815)),
-}'''
-
 
 #function to load the font of the game for buttons and texts
 def load_font(relative_path, size):
@@ -64,7 +41,6 @@ pygame.mixer.music.load("musica/cancion__menu_1.mp3")
 pygame.mixer.music.set_volume(0.5)
 pygame.mixer.music.play(-1)  # Play in loop
 
-#Global variables for the first 2 levels, all the elements that they all need 
 
 #Creating a function that loads and scales at the same time all
 def load_image(path, width, height, rotate=None):
