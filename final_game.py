@@ -24,38 +24,45 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Mafia's Golf")
 
 #Load and scale the img
-title_game = pygame.transform.scale(pygame.image.load("Final proyect v.S/Images/title_game.png"), (760, 400))
+'''title_game = pygame.transform.scale(pygame.image.load("Final proyect v.S/Images/title_game.png"), (760, 400))
 background_image = pygame.transform.scale(pygame.image.load("Final proyect v.S/Images/background_potencial.png"), (1345, 760))
 play_button_image = pygame.transform.scale(pygame.image.load("Final proyect v.S/Images/boton_play.png").convert_alpha(), (190, 70))
 levels_button_image = pygame.transform.scale(pygame.image.load("Final proyect v.S/Images/botones_levels_credits.png").convert_alpha(), (285, 135))
 credits_button_image = pygame.transform.scale(pygame.image.load("Final proyect v.S/Images/botones_levels_credits.png").convert_alpha(), (300, 135))
 logo_image = pygame.transform.scale(pygame.image.load("Final proyect v.S/Images/latin_mafia_logo.png").convert_alpha(), (3000, 900))
 credits_card = pygame.transform.scale(pygame.image.load("Images/credits_card2.png").convert_alpha(), (1250, 750))
-arrow_image_up = pygame.transform.scale(pygame.image.load("Final proyect v.S/Images/flecha_verde.png").convert_alpha(),  (100, 110))
+arrow_image_up = pygame.transform.scale(pygame.image.load("/Images/flecha_verde.png").convert_alpha(),  (100, 110))
 arrow_image_down = pygame.transform.rotate(arrow_image_up, (180))
 arrow_image_left = pygame.transform.rotate(arrow_image_up, (90))
 arrow_image_right = pygame.transform.rotate(arrow_image_up, (270))
-arrow_border_image_up = pygame.transform.scale(pygame.image.load("Final proyect v.S/Images/flecha_contorno.png").convert_alpha(),  (100, 110))
+arrow_border_image_up = pygame.transform.scale(pygame.image.load("/Images/flecha_contorno.png").convert_alpha(),  (100, 110))
 arrow_border_image_down = pygame.transform.rotate(arrow_border_image_up, (180))
 arrow_border_image_left = pygame.transform.rotate(arrow_border_image_up, (90))
 arrow_border_image_right = pygame.transform.rotate(arrow_border_image_up, (270))
-level_display_image = pygame.transform.scale(pygame.image.load("Final proyect v.S/Images/carta_niveles.png"), (1100, 660))
+level_display_image = pygame.transform.scale(pygame.image.load("/Images/carta_niveles.png"), (1100, 660))
 level_previews = {
-    1: pygame.transform.scale(pygame.image.load("Final proyect v.S/Images/level1_preview_image.png"), (755, 815)),
-    2: pygame.transform.scale(pygame.image.load("Final proyect v.S/Images/level2_preview_image.png"), (755, 815)),
-    3: pygame.transform.scale(pygame.image.load("Final proyect v.S/Images/level3_preview_image.png"), (755, 815)),
-}
+    1: pygame.transform.scale(pygame.image.load("/Images/level1_preview_image.png"), (755, 815)),
+    2: pygame.transform.scale(pygame.image.load("/Images/level2_preview_image.png"), (755, 815)),
+    3: pygame.transform.scale(pygame.image.load("/Images/level3_preview_image.png"), (755, 815)),
+}'''
 
-preview_border = pygame.transform.scale(pygame.image.load("Final proyect v.S/Images/borde_previeew_1try.png"), (755, 815)),
+
+#function to load the font of the game for buttons and texts
+def load_font(relative_path, size):
+    base_path = os.path.dirname(__file__)  # Ruta del archivo actual
+    absolute_path = os.path.join(base_path, relative_path)
+    return pygame.font.Font(absolute_path, size)
 
 # Load fonts
-title_font = pygame.font.Font("Final proyect v.S/fonts/Caveat-VariableFont_wght.ttf", 150)
-button_font = pygame.font.Font("Final proyect v.S/fonts/BagelFatOne-Regular.ttf", 50)
+title_font = load_font("fonts/Caveat-VariableFont_wght.ttf", 150)
+button_font = load_font("fonts/BagelFatOne-Regular.ttf", 50)
+
+
 
 # Load music
-pygame.mixer.music.load("Final proyect v.S/musica/cancion__menu_1.mp3")
+pygame.mixer.music.load("musica/cancion__menu_1.mp3")
 pygame.mixer.music.set_volume(0.5)
-pygame.mixer.music.play(-1)  # Reproducir en bucle
+pygame.mixer.music.play(-1)  # Play in loop
 
 #Global variables for the first 2 levels, all the elements that they all need 
 
@@ -65,24 +72,58 @@ def load_image(path, width, height, rotate=None):
     if rotate:
         image = pygame.transform.rotate(image, rotate)
     return pygame.transform.scale(image, (width, height))
+
+preview_border = load_image("Images/borde_previeew_1try.png", 755, 815)
+
 #loading the picture of the arrow that will be used for the ball
-arrow = load_image("Final proyect 2/Images/arrow.png", 20, 30,rotate = 270)
+arrow = load_image("Images/arrow.png", 20, 30,rotate = 270)
+
+#Load and scale the img for the main menu
+title_game = load_image("Images/title_game.png", 760, 400)
+background_image = load_image("Images/background_potencial.png", 1345, 760)
+play_button_image = load_image("Images/boton_play.png", 190, 70)
+levels_button_image = load_image("Images/botones_levels_credits.png", 285, 135)
+credits_button_image = load_image("Images/botones_levels_credits.png", 300, 135)
+logo_image = load_image("Images/latin_mafia_logo.png", 3000, 900)
+credits_card = load_image("Images/credits_card2.png", 1250, 750)
+arrow_image_up = load_image("Images/flecha_verde.png", 100, 110)
+arrow_image_down = pygame.transform.rotate(arrow_image_up, (180))
+arrow_image_left = pygame.transform.rotate(arrow_image_up, (90))
+arrow_image_right = pygame.transform.rotate(arrow_image_up, (270))
+arrow_border_image_up = load_image("Images/flecha_contorno.png", 100, 110)
+arrow_border_image_down = pygame.transform.rotate(arrow_border_image_up, (180))
+arrow_border_image_left = pygame.transform.rotate(arrow_border_image_up, (90))
+arrow_border_image_right = pygame.transform.rotate(arrow_border_image_up, (270))
+level_display_image = load_image("Images/carta_niveles.png", 1100, 660)
+level_previews = {
+    1: load_image("Images/level1_preview_image.png", 755, 815),
+    2: load_image("Images/level2_preview_image.png", 755, 815),
+    3: load_image("Images/level3_preview_image.png", 755, 815),
+}
+
+preview_border = load_image("Images/borde_previeew_1try.png", 755, 815)
+
 
 #Global variables level 1 only!!!!
 #Images level 1
-ball = load_image('PruebaFINAL.S/Final proyect 2/Images/pelota.png',25,25)
-tree_1 = load_image("PruebaFINAL.S/Images/Nivel_1_recursos_normal/arboles_2.png",225, 225)
-tree_2 = load_image("PruebaFINAL.S/Images/Nivel_1_recursos_normal/arboles_2.png",225, 225)
-start_flag1 = load_image("PruebaFINAL.S/Final proyect 2/Images/flag_start.png",100, 85)
-hole1 = load_image("PruebaFINAL.S/Final proyect 2/Images/hoyo.png",60,90)
-lake_left_image = load_image("PruebaFINAL.S/Images/Nivel_1_recursos_normal/lago_abajo_nivel_1.png",750, 750)
-lake_right_image = load_image("PruebaFINAL.S/Images/Nivel_1_recursos_normal/lago_arriba_nivel_1.png",370, 700)
-lilducks_image = load_image("PruebaFINAL.S/Images/Nivel_1_recursos_normal/patitos.png",150,150)
-big_duck_image = load_image("PruebaFINAL.S/Images/Nivel_1_recursos_normal/patote.png",125,125)
-sand_image_top = load_image("PruebaFINAL.S/Images/Nivel_1_recursos_normal/arena_arriba.png",280, 100)
-sand_image_center = load_image("PruebaFINAL.S/Images/Nivel_1_recursos_normal/arena1.png",360, 280,rotate=270)
+ball = load_image('Images/pelota.png',25,25)
+tree_1 = load_image("Images/Nivel_1_recursos_normal/arboles_2.png",225, 225)
+tree_2 = load_image("Images/Nivel_1_recursos_normal/arboles_2.png",225, 225)
+start_flag1 = load_image("Final proyect 2/Imagenes/flag_start.png",100, 85)
+hole1 = load_image("Final proyect 2/Imagenes/hoyo.png",60,90)
+lake_left_image = load_image("Images/Nivel_1_recursos_normal/lago_abajo_nivel_1.png",750, 750)
+lake_right_image = load_image("Images/Nivel_1_recursos_normal/lago_arriba_nivel_1.png",370, 700)
+lilducks_image = load_image("Images/Nivel_1_recursos_normal/patitos.png",150,150)
+big_duck_image = load_image("Images/Nivel_1_recursos_normal/patote.png",125,125)
+sand_image_top = load_image("Images/Nivel_1_recursos_normal/arena_arriba.png",280, 100)
+sand_image_center = load_image("Images/Nivel_1_recursos_normal/arena1.png",360, 280,rotate=270)
 
-splash_sound = pygame.mixer.Sound("PruebaFINAL.S/Images/Nivel_1_recursos_normal/splash_sound.mp3") #sound when the ball touches the lake
+def load_sound(relative_path):
+    base_path = os.path.dirname(__file__)  # Ruta del archivo actual
+    absolute_path = os.path.join(base_path, relative_path)
+    return pygame.mixer.Sound(absolute_path)
+
+splash_sound = load_sound("Images/Nivel_1_recursos_normal/splash_sound.mp3") #sound when the ball touches the lake
 
 #Rectangles for objects in order for them to move or be able to do something within the game
 ball_rec1 = pygame.Rect(239, 650, 25, 25)
@@ -169,17 +210,17 @@ start_x, start_y = 0, 0
 shots_taken = 0
 game_finished = False        
 #Loading the object images and resizing them
-santa = load_image("PruebaFINAL.S/Images/Nivel_2_recursos_navidad/santa_nivel_2.png",150, 150)  
-start_flag = load_image('PruebaFINAL.S/Final proyect 2/Images/flag_start.png',100, 85)
-win_hole = load_image("PruebaFINAL.S/Final proyect 2/Images/hoyo.png",60,90)   
-ball_image = load_image('PruebaFINAL.S/Final proyect 2/Images/pelota.png',25,25)
-wall1_image = load_image ('PruebaFINAL.S/Images/Nivel_2_recursos_navidad/muro_regalos_2.png',80, 280, rotate = 90)
-wall2_image = load_image('PruebaFINAL.S/Images/Nivel_2_recursos_navidad/muro_regalos_2.png',80, 280, rotate = 90)
-arrow = load_image("Final proyect 2/Images/arrow.png", 20, 30,rotate = 270)
-gift1 = load_image("PruebaFINAL.S/Images/Nivel_2_recursos_navidad/regalo1_nivel_2.png", 100, 100)
-gift2 = load_image("PruebaFINAL.S/Images/Nivel_2_recursos_navidad/regalo2_nivel_2.png",100, 100)
-gift3 = load_image("PruebaFINAL.S/Images/Nivel_2_recursos_navidad/regalo3_nivel_2.png",100, 100)
-gift4 = load_image("PruebaFINAL.S/Images/Nivel_2_recursos_navidad/regalo4_nivel_2.png",100, 100)
+santa = load_image("Images/Nivel_2_recursos_navidad/santa_nivel_2.png",150, 150)  
+start_flag = load_image('Final proyect 2/Imagenes/flag_start.png',100, 85)
+win_hole = load_image("Final proyect 2/Imagenes/hoyo.png",60,90)   
+ball_image = load_image('Final proyect 2/Imagenes/pelota.png',25,25)
+wall1_image = load_image ('Images/Nivel_2_recursos_navidad/muro_regalos_2.png',80, 280, rotate = 90)
+wall2_image = load_image('Images/Nivel_2_recursos_navidad/muro_regalos_2.png',80, 280, rotate = 90)
+arrow = load_image("Final proyect 2/Imagenes/arrow.png", 20, 30,rotate = 270)
+gift1 = load_image("Images/Nivel_2_recursos_navidad/regalo1_nivel_2.png", 100, 100)
+gift2 = load_image("Images/Nivel_2_recursos_navidad/regalo2_nivel_2.png",100, 100)
+gift3 = load_image("Images/Nivel_2_recursos_navidad/regalo3_nivel_2.png",100, 100)
+gift4 = load_image("Images/Nivel_2_recursos_navidad/regalo4_nivel_2.png",100, 100)
 gift_images = [gift1 , gift2, gift3, gift4]
 last_gift_spawn = 0  # starts counting the time since the last one appeared
 GIFT_SPAWN_RATE = 1500 # time between gifts
@@ -367,7 +408,7 @@ def level_1():
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    running = False  # Regresar al menú
+                    running = False  # Return to menu
 
         pygame.mixer.init()
         pygame.init()
@@ -380,7 +421,7 @@ def level_1():
         
         # Background
         
-        background_image = pygame.image.load("PruebaFINAL.S/Images/Nivel_1_recursos_normal/fondo_basico.jpg")  
+        background_image = pygame.image.load("Images/Nivel_1_recursos_normal/fondo_basico.jpg")  
         background_image = pygame.transform.rotate(background_image, 270)  # Rotate the image 270 degrees
         background_image = pygame.transform.scale(background_image, (screen_width, screen_height))  # Scale to fit the screen
         
@@ -396,19 +437,6 @@ def level_1():
             screen.blit(sand_image_center, (905, 300)) #Sand below the tree
             screen.blit(sand_image_top, (776, 50)) #sand top of the image
             screen.blit(hole1, (hole1_rec.x, hole1_rec.y))
-            for rect in tree_rec:
-                pygame.draw.rect(screen, (34, 139, 34), rect, 2)  # Use color for debugging
-            
-            # Draw sand rectangles
-            for rect in sand_rec:
-                pygame.draw.rect(screen, (194, 178, 128), rect, 2)  # Use color for debugging
-            
-            # Draw lake rectangles
-            for rect in lake_left_rec:
-                pygame.draw.rect(screen, (0, 0, 255), rect, 2)  # Use color for debugging
-            for rect in lake_right_rec:
-                pygame.draw.rect(screen, (0, 0, 255), rect, 2)  # Use color for debugging
-            
             screen.blit(lilducks_image, (320, 200))
             screen.blit(big_duck_image, (big_duck_rec.x, big_duck_rec.y))
             screen.blit(ball, (ball_rec1.x, ball_rec1.y))
@@ -637,8 +665,8 @@ def level_1():
             screen_width, screen_height = screen.get_size()
             end_screen_running = True
 
-            main_menu_button = pygame.image.load("Final proyect 2/Final proyect/Images/boton_play.png").convert_alpha()
-            play_again_button = pygame.image.load("Final proyect 2/Final proyect/Images/botones_levels_credits.png").convert_alpha()
+            main_menu_button = pygame.image.load("Final proyect 2/Final proyect/Imagenes/boton_play.png").convert_alpha()
+            play_again_button = pygame.image.load("Final proyect 2/Final proyect/Imagenes/botones_levels_credits.png").convert_alpha()
 
             main_menu_button = pygame.transform.scale(main_menu_button, (250, 70))
             play_again_button = pygame.transform.scale(play_again_button, (290, 120))
@@ -757,7 +785,7 @@ def level_1():
                     game_finished = True
                     show_end_screen("win", level_1, main_menu)
                         
-                if shots_taken >= MAX_SHOTS and not game_finished:
+                if shots_taken >= MAX_SHOTS and not game_finished and ball_velocity.length() == 0:
                     game_finished = True
                     show_end_screen("lose", level_1, main_menu)
                     
@@ -791,9 +819,9 @@ def level_2():
 
         # setting the background
         background_surface = pygame.Surface((screen_width, screen_height), pygame.SRCALPHA)
-        background = pygame.image.load('PruebaFINAL.S/Images/Nivel_2_recursos_navidad/fondo_navidad.jpg')
-        background = pygame.transform.rotate(background, 90)
-        background = pygame.transform.scale(background, (screen_width, screen_height))
+        background = load_image('Images/Nivel_2_recursos_navidad/fondo_navidad.jpg', screen_width, screen_height, rotate = 90)
+        #background = pygame.transform.rotate(background, 90)
+        #background = pygame.transform.scale(background, (screen_width, screen_height))
         
         # Fonts
         font1 = pygame.font.SysFont(None, 35)
@@ -986,8 +1014,8 @@ def level_2():
             screen_width, screen_height = screen.get_size()
             end_screen_running = True
 
-            main_menu_button = pygame.image.load("Final proyect 2/Final proyect/Images/boton_play.png").convert_alpha()
-            play_again_button = pygame.image.load("Final proyect 2/Final proyect/Images/botones_levels_credits.png").convert_alpha()
+            main_menu_button = pygame.image.load("Final proyect 2/Final proyect/Imagenes/boton_play.png").convert_alpha()
+            play_again_button = pygame.image.load("Final proyect 2/Final proyect/Imagenes/botones_levels_credits.png").convert_alpha()
 
             main_menu_button = pygame.transform.scale(main_menu_button, (250, 70))
             play_again_button = pygame.transform.scale(play_again_button, (290, 120))
@@ -1168,7 +1196,7 @@ def level_3():
 
         # Load background image
         background_surface = pygame.Surface((screen_width, screen_height), pygame.SRCALPHA)
-        background_image = pygame.image.load(os.path.join("Final proyect 2/Images/Nivel_4_recursos_mafialand/fondo_mafialand.PNG"))
+        background_image = pygame.image.load(os.path.join("Final proyect 2/Imagenes/Nivel_4_recursos_mafialand/fondo_mafialand.PNG"))
         background_image = pygame.transform.rotate(background_image, -90)
         background_image = pygame.transform.scale(background_image, (1345, 760))
         background_surface.blit(background_image, (0, 0))
@@ -1182,15 +1210,15 @@ def level_3():
             return pygame.transform.scale(image, (width, height))
 
         #load the object images and resize them
-        flag_start = load_image("Final proyect 2/Images/flag_start.png", 100, 85)
-        hole = load_image("Final proyect 2/Images/hoyo.png", 60, 90)
-        ball = load_image("Final proyect 2/Images/pelota.png", 25, 25)
-        arrow = load_image("Final proyect 2/Images/arrow.png", 20, 30,rotate = 270)
-        car = load_image("Final proyect 2/Images/Nivel_4_recursos_mafialand/car.png", 250, 140, rotate=270)
-        bottles = load_image("Final proyect 2/Images/Nivel_4_recursos_mafialand/bottles.png", 90, 83)
-        thief = load_image("Final proyect 2/Images/Nivel_4_recursos_mafialand/thief.png", 114, 106)
-        bottles2 = load_image("Final proyect 2/Images/Nivel_4_recursos_mafialand/bottles2.png", 89, 90)
-        trash = load_image("Final proyect 2/Images/Nivel_4_recursos_mafialand/trash.png", 300, 150)
+        flag_start = load_image("Final proyect 2/Imagenes/flag_start.png", 100, 85)
+        hole = load_image("Final proyect 2/Imagenes/hoyo.png", 60, 90)
+        ball = load_image("Final proyect 2/Imagenes/pelota.png", 25, 25)
+        arrow = load_image("Final proyect 2/Imagenes/arrow.png", 20, 30,rotate = 270)
+        car = load_image("Final proyect 2/Imagenes/Nivel_4_recursos_mafialand/car.png", 250, 140, rotate=270)
+        bottles = load_image("Final proyect 2/Imagenes/Nivel_4_recursos_mafialand/bottles.png", 90, 83)
+        thief = load_image("Final proyect 2/Imagenes/Nivel_4_recursos_mafialand/thief.png", 114, 106)
+        bottles2 = load_image("Final proyect 2/Imagenes/Nivel_4_recursos_mafialand/bottles2.png", 89, 90)
+        trash = load_image("Final proyect 2/Imagenes/Nivel_4_recursos_mafialand/trash.png", 300, 150)
 
 
         # object rectangles, it will be the way for them to move or interact with the ball in the game 
@@ -1261,8 +1289,8 @@ def level_3():
             end_screen_running = True
             
             # Preload button images
-            main_menu_button = pygame.image.load("Final proyect 2/Final proyect/Images/boton_play.png").convert_alpha()
-            play_again_button = pygame.image.load("Final proyect 2/Final proyect/Images/botones_levels_credits.png").convert_alpha()
+            main_menu_button = pygame.image.load("Final proyect 2/Final proyect/Imagenes/boton_play.png").convert_alpha()
+            play_again_button = pygame.image.load("Final proyect 2/Final proyect/Imagenes/botones_levels_credits.png").convert_alpha()
             
             # Scale buttons to appropriate sizes
             main_menu_button = pygame.transform.scale(main_menu_button, (250, 70))
@@ -1435,7 +1463,7 @@ def level_3():
                         game_finished = True
                         show_end_screen("win", level_3, main_menu)
                     
-                    elif shots_left <= 0 and not game_finished:
+                    elif shots_left <= 0 and not game_finished and ball_velocity.length() == 0:
                         game_finished = True
                         show_end_screen("lose", level_3, main_menu)
                 # Update thief position (restricted to 100 pixels up and down)
