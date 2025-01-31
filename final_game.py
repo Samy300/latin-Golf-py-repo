@@ -497,13 +497,17 @@ def level_1():
 
 
         #Define the function on what to do if the ball collides with the duck
-        def duck_collision(ball_x,ball_y):
-            global ball, duck_x, duck_y, ball_rec1, duck_holding_ball, duck_cooldown,shots_taken,ball_velocity
+        def duck_collision(ball_x, ball_y):
+            global ball, duck_x, duck_y, ball_rec1, duck_holding_ball, duck_cooldown, shots_taken, ball_velocity
 
-            if duck_holding_ball or duck_cooldown:
-                return  # If the duck is already holding the ball or is in cooldown, do nothing
+            # Allows the duck to hold the ball multiple times
+            if duck_holding_ball:
+                return  #Don't do anything until the duck leaves the ball
+            # If the duck is in cooldown, but the ball is in the lake again (falls in the lake again), reset the cooldown
+            if duck_cooldown:
+                duck_cooldown = False  # Deactivating the cooldown in order to allow the reactivation
 
-            pygame.time.set_timer(pygame.USEREVENT + 1, 2000)
+            pygame.time.set_timer(pygame.USEREVENT + 1, 1000)
             
             #New postion of the ball
             ball_pos = pygame.Vector2(ball_x, ball_y)
@@ -740,11 +744,10 @@ def level_1():
                 # Inside your ball collision checking (for lakes)
                 for rect in lake_left_rec:
                     if ball_rec1.colliderect(rect):
-                        if ball_velocity.length() > 0:  # Ball is moving
-                            ball_velocity = pygame.Vector2(0, 0)  # Stop the ball
-                            pygame.mixer.Sound.play(splash_sound)  # Play splash sound
-                            # Call duck interaction only for the left lake
-                            duck_collision(ball_rec1.x, ball_rec1.y)
+                        if not duck_holding_ball:  # Only activate if the duck is not holding the b all
+                            ball_velocity = pygame.Vector2(0, 0)  #Stop the ball
+                            pygame.mixer.Sound.play(splash_sound)  # Sonido de splash
+                            duck_collision(ball_rec1.x, ball_rec1.y) 
 
                 # Make sure the ball doesn't interact with the right lake (no duck)
                 for rect in lake_right_rec:
@@ -1439,7 +1442,7 @@ def level_3():
                         game_finished = True
                         show_end_screen("win", level_3, main_menu)
                     
-                    elif shots_left <= 0 and not game_finished and ball_velocity.length() == 0:
+                    elif shots_taken >= MAX_SHOTS and not game_finished and ball_velocity.length() == 0:
                         game_finished = True
                         show_end_screen("lose", level_3, main_menu)
                 # Update thief position (restricted to 100 pixels up and down)
