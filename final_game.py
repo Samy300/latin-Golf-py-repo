@@ -52,7 +52,7 @@ def load_image(path, width, height, rotate=None):
 preview_border = load_image("Images/borde_previeew_1try.png", 755, 815)
 
 #loading the picture of the arrow that will be used for the ball
-arrow = load_image("Images/arrow.png", 20, 30,rotate = 270)
+arrow = load_image("Images/arrow_button.png", 20, 30,rotate = 270)
 
 #Load and scale the img for the main menu
 title_game = load_image("Images/title_game.png", 760, 400)
@@ -702,7 +702,7 @@ def level_1():
                     mouse_pos = pygame.Vector2(pygame.mouse.get_pos())
                     if ball_rec1.collidepoint(mouse_pos) and ball_velocity.length() == 0:
                         dragging = True
-                        start_pos = mouse_pos
+                        start_pos1 = mouse_pos
 
                 elif event.type == pygame.MOUSEBUTTONUP and dragging and shots_taken < MAX_SHOTS:
                     mouse_pos = pygame.Vector2(pygame.mouse.get_pos())
